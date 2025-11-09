@@ -12,21 +12,27 @@ import json
 import time
 
 # ModelScope API base URL
-MODELSCOPE_API = "https://www.modelscope.cn/api/v1/models/deepseek-ai/DeepSeek-OCR/repo/files"
+MODELSCOPE_API = "https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files"
 MODEL_FILES_URL = "https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files"
 
-# Files to download (typical structure of DeepSeek-OCR model repo)
+# Files to download (explicit list from provided repository snapshot)
 REQUIRED_FILES = [
+    ".gitattributes",
     "config.json",
-    "configuration.json", 
-    "preprocessor_config.json",
-    "tokenizer_config.json",
-    "tokenizer.json",
+    "configuration.json",
+    "configuration_deepseek_v2.py",
+    "conversation.py",
+    "deepencoder.py",
+    "LICENSE",
+    "model-00001-of-000001.safetensors",
+    "model.safetensors.index.json",
+    "modeling_deepseekocr.py",
+    "modeling_deepseekv2.py",
+    "processor_config.json",
+    "README.md",
     "special_tokens_map.json",
-    "vocab.json",
-    "merges.txt",
-    "model.safetensors",
-    "pytorch_model.bin",
+    "tokenizer.json",
+    "tokenizer_config.json"
 ]
 
 def get_file_list():
