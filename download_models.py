@@ -1,6 +1,6 @@
 """
 DeepSeek-OCR Model Downloader
-从 ModelScope 下载 DeepSeek-OCR 模型文件到 ./models 目录
+Download DeepSeek-OCR model files from ModelScope into ./models
 """
 
 import os
@@ -11,11 +11,11 @@ from tqdm import tqdm
 import json
 import time
 
-# ModelScope API 基础 URL
+# ModelScope API base URL
 MODELSCOPE_API = "https://www.modelscope.cn/api/v1/models/deepseek-ai/DeepSeek-OCR/repo/files"
 MODEL_FILES_URL = "https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files"
 
-# 需要下载的文件列表（根据 DeepSeek-OCR 项目的典型结构）
+# Files to download (typical structure of DeepSeek-OCR model repo)
 REQUIRED_FILES = [
     "config.json",
     "configuration.json", 
@@ -30,13 +30,13 @@ REQUIRED_FILES = [
 ]
 
 def get_file_list():
-    """从 ModelScope API 获取文件列表"""
+    """Fetch file list from ModelScope API."""
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
         
-        # 尝试通过 API 获取文件列表
+    # Try to fetch the file list via API
         response = requests.get(MODELSCOPE_API, headers=headers, timeout=30)
         
         if response.status_code == 200:
@@ -44,18 +44,18 @@ def get_file_list():
             if 'Data' in data and isinstance(data['Data'], list):
                 return [item['Path'] for item in data['Data'] if 'Path' in item]
         
-        print(f"⚠️  无法通过 API 获取文件列表 (状态码: {response.status_code})")
-        print("   将使用预定义的文件列表...")
+        print(f"⚠️  Unable to fetch file list via API (status code: {response.status_code})")
+        print("   Falling back to predefined file list...")
         return REQUIRED_FILES
         
     except Exception as e:
-        print(f"⚠️  获取文件列表时出错: {e}")
-        print("   将使用预定义的文件列表...")
+        print(f"⚠️  Error while fetching file list: {e}")
+        print("   Falling back to predefined file list...")
         return REQUIRED_FILES
 
 
 def download_file(url, destination, max_retries=3):
-    """下载单个文件，支持断点续传和重试"""
+    """Download a single file with resume support and retries."""
     
     destination = Path(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -64,7 +64,7 @@ def download_file(url, destination, max_retries=3):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     }
     
-    # 检查本地文件
+    # Check local partial file for resuming
     resume_header = {}
     initial_pos = 0
     if destination.exists():
@@ -76,7 +76,7 @@ def download_file(url, destination, max_retries=3):
             response = requests.get(url, headers={**headers, **resume_header}, 
                                    stream=True, timeout=30)
             
-            # 如果服务器不支持断点续传，从头开始
+            # Restart from scratch if server doesn't support range requests
             if response.status_code == 416 or (response.status_code == 200 and initial_pos > 0):
                 initial_pos = 0
                 response = requests.get(url, headers=headers, stream=True, timeout=30)
@@ -97,78 +97,78 @@ def download_file(url, destination, max_retries=3):
                             f.write(chunk)
                             pbar.update(len(chunk))
             
-            # 验证文件完整性
+            # Validate file size
             if total_size > 0 and destination.stat().st_size != total_size:
-                raise Exception("文件大小不匹配")
+                raise Exception("File size mismatch")
             
             return True
             
         except Exception as e:
-            print(f"\n⚠️  下载失败 (尝试 {attempt + 1}/{max_retries}): {e}")
+            print(f"\n⚠️  Download failed (attempt {attempt + 1}/{max_retries}): {e}")
             if attempt < max_retries - 1:
                 wait_time = 2 ** attempt
-                print(f"   等待 {wait_time} 秒后重试...")
+                print(f"   Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
             else:
-                print(f"❌ 下载 {destination.name} 失败")
+                print(f"❌ Failed to download {destination.name}")
                 return False
     
     return False
 
 
 def download_models():
-    """下载所有模型文件"""
+    """Download all required model files."""
     
     models_dir = Path("./models")
     models_dir.mkdir(exist_ok=True)
     
     print("=" * 60)
-    print("DeepSeek-OCR 模型下载器")
+    print("DeepSeek-OCR Model Downloader")
     print("=" * 60)
-    print(f"目标目录: {models_dir.absolute()}\n")
+    print(f"Target directory: {models_dir.absolute()}\n")
     
-    # 获取文件列表
-    print("📋 获取文件列表...")
+    # Get file list
+    print("📋 Fetching file list...")
     file_list = get_file_list()
-    print(f"✓ 找到 {len(file_list)} 个文件\n")
+    print(f"✓ Found {len(file_list)} files\n")
     
-    # 下载文件
+    # Download files
     success_count = 0
     failed_files = []
     
     for filename in file_list:
-        # 构建下载 URL (ModelScope CDN)
+    # Build download URL (ModelScope API)
         download_url = f"https://www.modelscope.cn/api/v1/models/deepseek-ai/DeepSeek-OCR/repo?Revision=master&FilePath={filename}"
         
         destination = models_dir / filename
         
-        # 检查文件是否已存在
+        # Skip if exists
         if destination.exists():
-            print(f"✓ {filename} 已存在，跳过")
+            print(f"✓ {filename} already exists, skipping")
             success_count += 1
             continue
         
-        print(f"\n📥 下载: {filename}")
+        print(f"\n📥 Downloading: {filename}")
         if download_file(download_url, destination):
-            print(f"✓ 完成: {filename}")
+            print(f"✓ Done: {filename}")
             success_count += 1
         else:
             failed_files.append(filename)
     
-    # 总结
+    # Summary
     print("\n" + "=" * 60)
-    print(f"下载完成: {success_count}/{len(file_list)} 个文件")
+    print(f"Completed: {success_count}/{len(file_list)} files")
     
     if failed_files:
-        print(f"\n❌ 以下文件下载失败:")
+        print(f"\n❌ Failed files:")
         for f in failed_files:
             print(f"   - {f}")
-        print("\n💡 提示: 您可以:")
-        print("   1. 重新运行此脚本继续下载")
-        print(f"   2. 手动访问 {MODEL_FILES_URL} 下载")
+        print("\n💡 Tips:")
+        print("   1. Re-run this script to continue downloading")
+        print(f"   2. Manually download from {MODEL_FILES_URL}")
         return False
     else:
-        print("\n✅ 所有文件下载成功!")
+        print("\n✅ All files downloaded successfully!")
         return True
 
 
@@ -177,10 +177,10 @@ if __name__ == "__main__":
         success = download_models()
         sys.exit(0 if success else 1)
     except KeyboardInterrupt:
-        print("\n\n⚠️  下载已取消")
+        print("\n\n⚠️  Download canceled")
         sys.exit(1)
     except Exception as e:
-        print(f"\n❌ 发生错误: {e}")
+        print(f"\n❌ Error occurred: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
