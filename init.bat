@@ -2,20 +2,26 @@
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
+:: Get the directory where the script is located
+set SCRIPT_DIR=%~dp0
+
+:: Change to script directory
+cd /d "%SCRIPT_DIR%"
+
 echo ============================================================
 echo DeepSeek-OCR Portable Environment Initializer
 echo ============================================================
 echo.
 
 :: Check env directory
-if exist ".\env\Scripts\python.exe" (
+if exist "%SCRIPT_DIR%env\python.exe" (
     echo [1/4] Existing virtual environment detected
     echo       Skipping environment creation
     echo.
     
     echo [2/4] Checking Python version...
-    for /f "tokens=2" %%i in ('.\env\Scripts\python.exe --version 2^>^&1') do set PYTHON_VERSION=%%i
-    echo       Python detected: %PYTHON_VERSION%
+    for /f "tokens=2" %%i in ('"%SCRIPT_DIR%env\python.exe" --version 2^>^&1') do set PYTHON_VERSION=%%i
+    echo       Python detected: !PYTHON_VERSION!
     echo.
 ) else (
     :: Check if system Python is installed for creating venv
@@ -32,10 +38,10 @@ if exist ".\env\Scripts\python.exe" (
     
     echo [1/4] Checking Python version...
     for /f "tokens=2" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
-    echo       Python detected: %PYTHON_VERSION%
+    echo       Python detected: !PYTHON_VERSION!
     echo.
     
-    echo [2/4] Creating virtual environment at .\env ...
+    echo [2/4] Creating virtual environment at %SCRIPT_DIR%env ...
     python -m venv env
     if errorlevel 1 (
         echo [ERROR] Failed to create virtual environment
@@ -53,19 +59,19 @@ echo.
 
 :: Upgrade pip
 echo       Upgrading pip...
-.\env\Scripts\python.exe -m pip install --upgrade pip --quiet
+"%SCRIPT_DIR%env\python.exe" -m pip install --upgrade pip --quiet
 
 :: Install PyTorch CUDA build (fallback to CPU if failed)
 echo       Installing PyTorch (CUDA 12.8)...
-.\env\Scripts\pip.exe install torch==2.9.0+cu128 torchvision==0.24.0+cu128 torchaudio==2.9.0+cu128 --index-url https://download.pytorch.org/whl/cu128 --quiet
+"%SCRIPT_DIR%env\python.exe" -m pip install torch==2.9.0+cu128 torchvision==0.24.0+cu128 torchaudio==2.9.0+cu128 --index-url https://download.pytorch.org/whl/cu128 --quiet
 if errorlevel 1 (
     echo       [WARN] CUDA build failed, trying CPU build...
-    .\env\Scripts\pip.exe install torch torchvision torchaudio --quiet
+    "%SCRIPT_DIR%env\python.exe" -m pip install torch torchvision torchaudio --quiet
 )
 
 :: Install other dependencies
 echo       Installing other dependencies...
-.\env\Scripts\pip.exe install -r requirements.txt --quiet
+"%SCRIPT_DIR%env\python.exe" -m pip install -r requirements.txt --quiet
 if errorlevel 1 (
     echo [ERROR] Dependency installation failed
     pause
@@ -79,15 +85,15 @@ echo.
 echo [4/4] Downloading DeepSeek-OCR model files...
 echo.
 
-if not exist ".\models" (
-    mkdir models
+if not exist "%SCRIPT_DIR%models" (
+    mkdir "%SCRIPT_DIR%models"
 )
 
-.\env\Scripts\python.exe download_models.py
+"%SCRIPT_DIR%env\python.exe" download_models.py
 if errorlevel 1 (
     echo.
     echo [WARN] Model download not fully completed
-    echo        You can rerun later: .\env\Scripts\python.exe download_models.py
+    echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_models.py
     echo        Or manually download from: https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files
     echo.
 ) else (
@@ -103,10 +109,10 @@ echo ============================================================
 echo.
 echo Usage:
 echo   1. Run OCR: run_ocr.bat
-echo   2. Or run directly: .\env\Scripts\python.exe run_ocr.py
+echo   2. Or run directly: "%SCRIPT_DIR%env\python.exe" run_ocr.py
 echo.
 echo To re-download models:
-echo   .\env\Scripts\python.exe download_models.py
+echo   "%SCRIPT_DIR%env\python.exe" download_models.py
 echo.
 
 pause
