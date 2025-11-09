@@ -125,7 +125,7 @@ def download_file(url, destination, max_retries=3):
 def download_models():
     """Download all required model files."""
     
-    models_dir = Path("./models")
+    models_dir = Path("./models/DeepSeek-OCR")
     models_dir.mkdir(exist_ok=True)
     
     print("=" * 60)
