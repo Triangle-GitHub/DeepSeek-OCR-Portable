@@ -1,0 +1,45 @@
+{
+  "name": "liblzma",
+  "version": "5.8.1",
+  "build": "h2466b09_2",
+  "build_number": 2,
+  "channel": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64",
+  "subdir": "win-64",
+  "fn": "liblzma-5.8.1-h2466b09_2.conda",
+  "md5": "c15148b2e18da456f5108ccb5e411446",
+  "url": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64/liblzma-5.8.1-h2466b09_2.conda",
+  "sha256": "55764956eb9179b98de7cc0e55696f2eff8f7b83fc3ebff5e696ca358bca28cc",
+  "depends": [
+    "ucrt >=10.0.20348.0",
+    "vc >=14.2,<15",
+    "vc14_runtime >=14.29.30139"
+  ],
+  "constrains": [
+    "xz 5.8.1.*"
+  ],
+  "license": "0BSD",
+  "timestamp": 1749230611000,
+  "size": 104935,
+  "requested_spec": "None",
+  "package_tarball_full_path": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\liblzma-5.8.1-h2466b09_2.conda",
+  "extracted_package_dir": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\liblzma-5.8.1-h2466b09_2",
+  "files": [
+    "Library/bin/liblzma.dll"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "Library/bin/liblzma.dll",
+        "path_type": "hardlink",
+        "sha256": "4826969d1704c8a07764f1772d12b00f7dfcc70f992e43248b04c69f0bd02513",
+        "size_in_bytes": 186880,
+        "sha256_in_prefix": "4826969d1704c8a07764f1772d12b00f7dfcc70f992e43248b04c69f0bd02513"
+      }
+    ]
+  },
+  "link": {
+    "source": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\liblzma-5.8.1-h2466b09_2",
+    "type": 1
+  }
+}

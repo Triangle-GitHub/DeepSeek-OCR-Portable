@@ -1,0 +1,51 @@
+{
+  "name": "ca-certificates",
+  "version": "2025.10.5",
+  "build": "h4c7d964_0",
+  "build_number": 0,
+  "channel": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64",
+  "subdir": "noarch",
+  "fn": "ca-certificates-2025.10.5-h4c7d964_0.conda",
+  "md5": "e54200a1cd1fe33d61c9df8d3b00b743",
+  "url": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/noarch/ca-certificates-2025.10.5-h4c7d964_0.conda",
+  "sha256": "bfb7f9f242f441fdcd80f1199edd2ecf09acea0f2bcef6f07d7cbb1a8131a345",
+  "depends": [
+    "__win"
+  ],
+  "constrains": [],
+  "noarch": "generic",
+  "license": "ISC",
+  "package_type": "noarch_generic",
+  "timestamp": 1759649104000,
+  "size": 156354,
+  "requested_spec": "None",
+  "package_tarball_full_path": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\ca-certificates-2025.10.5-h4c7d964_0.conda",
+  "extracted_package_dir": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\ca-certificates-2025.10.5-h4c7d964_0",
+  "files": [
+    "Library/ssl/cacert.pem",
+    "Library/ssl/cert.pem"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "Library/ssl/cacert.pem",
+        "path_type": "hardlink",
+        "sha256": "2089fc5a25836401faee99f722460b01b393999746a0fb817943666d6ecc0458",
+        "size_in_bytes": 291366,
+        "sha256_in_prefix": "2089fc5a25836401faee99f722460b01b393999746a0fb817943666d6ecc0458"
+      },
+      {
+        "_path": "Library/ssl/cert.pem",
+        "path_type": "hardlink",
+        "sha256": "2089fc5a25836401faee99f722460b01b393999746a0fb817943666d6ecc0458",
+        "size_in_bytes": 291366,
+        "sha256_in_prefix": "2089fc5a25836401faee99f722460b01b393999746a0fb817943666d6ecc0458"
+      }
+    ]
+  },
+  "link": {
+    "source": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\ca-certificates-2025.10.5-h4c7d964_0",
+    "type": 1
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "name": "libffi",
+  "version": "3.5.2",
+  "build": "h52bdfb6_0",
+  "build_number": 0,
+  "channel": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64",
+  "subdir": "win-64",
+  "fn": "libffi-3.5.2-h52bdfb6_0.conda",
+  "md5": "ba4ad812d2afc22b9a34ce8327a0930f",
+  "url": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64/libffi-3.5.2-h52bdfb6_0.conda",
+  "sha256": "ddff25aaa4f0aa535413f5d831b04073789522890a4d8626366e43ecde1534a3",
+  "depends": [
+    "ucrt >=10.0.20348.0",
+    "vc >=14.3,<15",
+    "vc14_runtime >=14.44.35208"
+  ],
+  "constrains": [],
+  "license": "MIT",
+  "timestamp": 1760295760000,
+  "size": 44866,
+  "requested_spec": "None",
+  "package_tarball_full_path": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\libffi-3.5.2-h52bdfb6_0.conda",
+  "extracted_package_dir": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\libffi-3.5.2-h52bdfb6_0",
+  "files": [
+    "Library/bin/ffi-8.dll",
+    "Library/include/ffi.h",
+    "Library/include/ffitarget.h",
+    "Library/lib/ffi.lib",
+    "Library/lib/libffi.lib",
+    "Library/lib/pkgconfig/libffi.pc",
+    "Library/share/info/libffi.info",
+    "Library/share/man/man3/ffi.3",
+    "Library/share/man/man3/ffi_call.3",
+    "Library/share/man/man3/ffi_prep_cif.3",
+    "Library/share/man/man3/ffi_prep_cif_var.3"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "Library/bin/ffi-8.dll",
+        "path_type": "hardlink",
+        "sha256": "2709f5f0cc6967d5f66fe8ec17e743889aa8efbec4be7f29f4717dd36148ec24",
+        "size_in_bytes": 27136,
+        "sha256_in_prefix": "2709f5f0cc6967d5f66fe8ec17e743889aa8efbec4be7f29f4717dd36148ec24"
+      },
+      {
+        "_path": "Library/include/ffi.h",
+        "path_type": "hardlink",
+        "sha256": "d2dc8e062d025410e6e5263ce696a41944cf16f70ad44edd9e8928773dd025e9",
+        "size_in_bytes": 14808,
+        "sha256_in_prefix": "d2dc8e062d025410e6e5263ce696a41944cf16f70ad44edd9e8928773dd025e9"
+      },
+      {
+        "_path": "Library/include/ffitarget.h",
+        "path_type": "hardlink",
+        "sha256": "45e4fd2585aaed711e4fa3d1377b70c8e54dcdc56bdf402fa23a8816d19cc58a",
+        "size_in_bytes": 4928,
+        "sha256_in_prefix": "45e4fd2585aaed711e4fa3d1377b70c8e54dcdc56bdf402fa23a8816d19cc58a"
+      },
+      {
+        "_path": "Library/lib/ffi.lib",
+        "path_type": "hardlink",
+        "sha256": "c0a600ac90f22d95d1d2f5303706e77f5bea80cd7854c984d3035fb4443833f7",
+        "size_in_bytes": 11646,
+        "sha256_in_prefix": "c0a600ac90f22d95d1d2f5303706e77f5bea80cd7854c984d3035fb4443833f7"
+      },
+      {
+        "_path": "Library/lib/libffi.lib",
+        "path_type": "hardlink",
+        "sha256": "c0a600ac90f22d95d1d2f5303706e77f5bea80cd7854c984d3035fb4443833f7",
+        "size_in_bytes": 11646,
+        "sha256_in_prefix": "c0a600ac90f22d95d1d2f5303706e77f5bea80cd7854c984d3035fb4443833f7"
+      },
+      {
+        "_path": "Library/lib/pkgconfig/libffi.pc",
+        "path_type": "hardlink",
+        "sha256": "c24d9479829dc12446994978ec70f9b08deb7d5bbf04a0ecea740b3bd17802ce",
+        "size_in_bytes": 330,
+        "sha256_in_prefix": "c24d9479829dc12446994978ec70f9b08deb7d5bbf04a0ecea740b3bd17802ce"
+      },
+      {
+        "_path": "Library/share/info/libffi.info",
+        "path_type": "hardlink",
+        "sha256": "f74b5b78ff5a2d0780d7c54801df646dc19d0dcfdd686d02a583ad37bc576317",
+        "size_in_bytes": 40391,
+        "sha256_in_prefix": "f74b5b78ff5a2d0780d7c54801df646dc19d0dcfdd686d02a583ad37bc576317"
+      },
+      {
+        "_path": "Library/share/man/man3/ffi.3",
+        "path_type": "hardlink",
+        "sha256": "aa4730e114c305943a2226a524ed8447dc6b66a184523999868e5433c2c9de74",
+        "size_in_bytes": 850,
+        "sha256_in_prefix": "aa4730e114c305943a2226a524ed8447dc6b66a184523999868e5433c2c9de74"
+      },
+      {
+        "_path": "Library/share/man/man3/ffi_call.3",
+        "path_type": "hardlink",
+        "sha256": "2817ce7b78cb737d7b85b18b45899470f5f565f990d056d3d8cfabf6d779477f",
+        "size_in_bytes": 2333,
+        "sha256_in_prefix": "2817ce7b78cb737d7b85b18b45899470f5f565f990d056d3d8cfabf6d779477f"
+      },
+      {
+        "_path": "Library/share/man/man3/ffi_prep_cif.3",
+        "path_type": "hardlink",
+        "sha256": "f60c5bb9d04b55988da13511a2c3edfa0f39fb6f51abfb8ac24d0b161c4169c0",
+        "size_in_bytes": 1158,
+        "sha256_in_prefix": "f60c5bb9d04b55988da13511a2c3edfa0f39fb6f51abfb8ac24d0b161c4169c0"
+      },
+      {
+        "_path": "Library/share/man/man3/ffi_prep_cif_var.3",
+        "path_type": "hardlink",
+        "sha256": "9365685252f33f13627c9303bc01883b764227132069260c19e94100ff442a51",
+        "size_in_bytes": 1321,
+        "sha256_in_prefix": "9365685252f33f13627c9303bc01883b764227132069260c19e94100ff442a51"
+      }
+    ]
+  },
+  "link": {
+    "source": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\libffi-3.5.2-h52bdfb6_0",
+    "type": 1
+  }
+}

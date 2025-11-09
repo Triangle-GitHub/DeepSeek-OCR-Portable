@@ -1,0 +1,32 @@
+{
+  "name": "vc",
+  "version": "14.3",
+  "build": "h2b53caa_32",
+  "build_number": 32,
+  "channel": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64",
+  "subdir": "win-64",
+  "fn": "vc-14.3-h2b53caa_32.conda",
+  "md5": "ef02bbe151253a72b8eda264a935db66",
+  "url": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64/vc-14.3-h2b53caa_32.conda",
+  "sha256": "82250af59af9ff3c6a635dd4c4764c631d854feb334d6747d356d949af44d7cf",
+  "depends": [
+    "vc14_runtime >=14.42.34433"
+  ],
+  "constrains": [],
+  "track_features": "vc14",
+  "license": "BSD-3-Clause",
+  "timestamp": 1760418772000,
+  "size": 18861,
+  "requested_spec": "None",
+  "package_tarball_full_path": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\vc-14.3-h2b53caa_32.conda",
+  "extracted_package_dir": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\vc-14.3-h2b53caa_32",
+  "files": [],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": []
+  },
+  "link": {
+    "source": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\vc-14.3-h2b53caa_32",
+    "type": 1
+  }
+}

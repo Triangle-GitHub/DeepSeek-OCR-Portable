@@ -1,0 +1,67 @@
+{
+  "name": "libsqlite",
+  "version": "3.51.0",
+  "build": "hf5d6505_0",
+  "build_number": 0,
+  "channel": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64",
+  "subdir": "win-64",
+  "fn": "libsqlite-3.51.0-hf5d6505_0.conda",
+  "md5": "d2c9300ebd2848862929b18c264d1b1e",
+  "url": "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/win-64/libsqlite-3.51.0-hf5d6505_0.conda",
+  "sha256": "2373bd7450693bd0f624966e1bee2f49b0bf0ffbc114275ed0a43cf35aec5b21",
+  "depends": [
+    "ucrt >=10.0.20348.0",
+    "vc >=14.3,<15",
+    "vc14_runtime >=14.44.35208"
+  ],
+  "constrains": [],
+  "license": "blessing",
+  "timestamp": 1762299749000,
+  "size": 1292710,
+  "requested_spec": "None",
+  "package_tarball_full_path": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\libsqlite-3.51.0-hf5d6505_0.conda",
+  "extracted_package_dir": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\libsqlite-3.51.0-hf5d6505_0",
+  "files": [
+    "Library/bin/sqlite3.dll",
+    "Library/include/sqlite3.h",
+    "Library/include/sqlite3ext.h",
+    "Library/lib/sqlite3.lib"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "Library/bin/sqlite3.dll",
+        "path_type": "hardlink",
+        "sha256": "08e74953cdd384183d89e9e923054d2f38bc95b1388781b89ee1e459450da698",
+        "size_in_bytes": 3195904,
+        "sha256_in_prefix": "08e74953cdd384183d89e9e923054d2f38bc95b1388781b89ee1e459450da698"
+      },
+      {
+        "_path": "Library/include/sqlite3.h",
+        "path_type": "hardlink",
+        "sha256": "54255b762709a525dff79b45df748d1abf10a75063e671d675c004a844a23471",
+        "size_in_bytes": 671765,
+        "sha256_in_prefix": "54255b762709a525dff79b45df748d1abf10a75063e671d675c004a844a23471"
+      },
+      {
+        "_path": "Library/include/sqlite3ext.h",
+        "path_type": "hardlink",
+        "sha256": "ea81fb7bd05882e0e0b92c4d60f677b205f7f1fbf085f218b12f0b5b3f0b9e48",
+        "size_in_bytes": 38632,
+        "sha256_in_prefix": "ea81fb7bd05882e0e0b92c4d60f677b205f7f1fbf085f218b12f0b5b3f0b9e48"
+      },
+      {
+        "_path": "Library/lib/sqlite3.lib",
+        "path_type": "hardlink",
+        "sha256": "7aab5c08c1012f27e26c5e2f940760fcec38c2a4120b557f60faa2edf1d2c337",
+        "size_in_bytes": 82638,
+        "sha256_in_prefix": "7aab5c08c1012f27e26c5e2f940760fcec38c2a4120b557f60faa2edf1d2c337"
+      }
+    ]
+  },
+  "link": {
+    "source": "C:\\Users\\Xiaochen-student\\miniconda3\\pkgs\\libsqlite-3.51.0-hf5d6505_0",
+    "type": 1
+  }
+}
