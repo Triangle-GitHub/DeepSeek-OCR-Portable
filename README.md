@@ -24,6 +24,7 @@ This is an **easy-to-use offline OCR tool** based on the **DeepSeek-OCR 1280×12
 
 ## 🚀 How to Use
 
+0. Double-click  `init.bat`,it will initialize the environments and download the model
 1. Double-click `run_ocr.bat`
 2. A file dialog will appear — select the image you want to OCR
 3. After processing, two files will be saved in the same directory as the original image:
