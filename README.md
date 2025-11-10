@@ -10,7 +10,7 @@ This is an **easy-to-use offline OCR tool** based on the **DeepSeek-OCR 1280×12
 - Output formats:
   - Markdown OCR result (`<filename>.md`)
   - Annotated image with bounding boxes (`<filename>_with_boxes.jpg`)
-- **Fully offline** — all dependencies and models are bundled locally
+- **"Green software" mode** — All dependencies and models require no manual downloads; fully offline after initial setup
 
 ---
 
@@ -24,14 +24,13 @@ This is an **easy-to-use offline OCR tool** based on the **DeepSeek-OCR 1280×12
 
 ## 🚀 How to Use
 
-0. Double-click  `init.bat`,it will initialize the environments and download the model
-1. Double-click `run_ocr.bat`
-2. A file dialog will appear — select the image you want to OCR
-3. After processing, two files will be saved in the same directory as the original image:
+1. Double-click `init.bat` (First run requires downloading models and dependencies - may take significant time)
+2. A file selection window will appear — select the image you want to OCR
+3. After processing, two files will be generated in the original image's directory:
    - Markdown OCR result: `<original_filename>.md`
    - Image with bounding boxes: `<original_filename>_with_boxes.jpg`
 
-> No need to install Python, Miniconda, or configure environment variables — everything is self-contained!
+> No need to install Python, Miniconda, or configure environment variables — all dependencies are automatically resolved!
 
 ---
 
@@ -39,29 +38,37 @@ This is an **easy-to-use offline OCR tool** based on the **DeepSeek-OCR 1280×12
 
 ```
 DeepSeek-OCR Portable/
-├── env/                   # Portable Python environment
-├── models/                # Model directory
-│   └── DeepSeek-OCR/      # DeepSeek OCR model files (must exist)
-├── run_ocr.bat            # Launch script
-├── run_ocr.py             # Core OCR logic
-└── README.md              # This file
+├── env/                      # Portable Python environment
+├── models/
+│   └── DeepSeek-OCR/         # DeepSeek OCR model files
+├── init.bat                  # One-click launch script (double-click to run)
+├── run_ocr.bat               # Quick offline launch script (requires pre-downloaded models)
+├── requirements.txt          # Python dependencies list
+├── required_model_files.json # Model file list
+├── check_model_files.py      # Model file existence checker
+├── download_model_files.py   # Model download script
+├── run_ocr.py                # OCR core logic
+├── README.md                 # Documentation
+└── README_zh.md              # Chinese documentation
+├── LICENSE                   # MIT License
 ```
 
 ---
 
 ## ⚠️ Notes
 
-- Make sure the `models/DeepSeek-OCR/` directory exists and contains complete model files; otherwise, the program will fail
-- If you encounter an "out of memory" error, try:
-  - Closing other GPU-intensive programs
-  - Reducing the `IMAGE_SIZE` in `run_ocr.py` to `1024` or `640`
-- This tool currently only supports **Windows**, not macOS or Linux
+- Initial download may be slow (~10GB) — please be patient
+- If encountering "out of memory" errors:
+  - Close other GPU-intensive applications
+  - Modify `IMAGE_SIZE` in `run_ocr.py` to `1024` or `640`
+- Currently **Windows-only** (no macOS/Linux support)
+- **NVIDIA GPU required** (CUDA 12.8 based) — AMD GPUs or CPU execution not supported
 
 ---
 
 ## 📝 Example Output
 
-Suppose you select an image named `document.jpg`. After OCR processing, the following files will be generated:
+Suppose you select an image named `document.jpg`. After OCR processing, the following files will be generated in the original image's directory:
 
 - `document.md` — OCR result in Markdown format
 - `document_with_boxes.jpg` — Original image with detection boxes overlaid
@@ -79,10 +86,10 @@ Suppose you select an image named `document.jpg`. After OCR processing, the foll
 
 ## 📌 Developer Notes
 
-You can customize the OCR behavior by modifying the following settings in `run_ocr.py`:
+You can customize the OCR behavior by modifying these parameters in `run_ocr.py`:
 
 ```python
-PROMPT = "<image>\n<|grounding|>Convert the document to markdown with full structure, including tables, formulas, figures, and references."
+PROMPT = "<image>\n<|grounding|>Convert the document to markdown with full structure, including "
 IMAGE_SIZE = 1280
 BASE_SIZE = 1280
 CROP_MODE = False

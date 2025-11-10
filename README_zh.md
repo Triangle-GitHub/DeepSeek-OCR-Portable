@@ -10,7 +10,7 @@
 - 输出格式：
   - Markdown 格式的 OCR 结果（`<文件名>.md`）
   - 带有边界框标注的图像（`<文件名>_with_boxes.jpg`）
-- **完全离线**运行 — 所有依赖项和模型均已本地打包
+- “绿色软件”模式 — 所有依赖项和模型无需手动下载，初次下载后可完全离线运行
 
 ---
 
@@ -24,14 +24,13 @@
 
 ## 🚀 使用方法
 
-0. 启动 `init.bat` ，进行环境配置及模型下载
-1. 双击运行 `run_ocr.bat`
+1. 双击运行 `init.bat` （首次运行需要下载模型和依赖，耗时较长）
 2. 弹出文件选择窗口，选择你想要进行 OCR 的图片
 3. 处理完成后，会在原图所在目录生成两个文件：
    - Markdown OCR 结果：`<原文件名>.md`
    - 带边界框的图片：`<原文件名>_with_boxes.jpg`
 
-> 无需安装 Python、Miniconda 或配置环境变量，所有依赖均已包含/自动补全！
+> 无需安装 Python、Miniconda 或配置环境变量，所有依赖都会自动补全！
 
 ---
 
@@ -39,23 +38,31 @@
 
 ```
 DeepSeek-OCR Portable/
-├── env/                   # 便携式 Python 环境
-├── models/                # 模型目录
-│   └── DeepSeek-OCR/      # DeepSeek OCR 模型文件（必须存在）
-├── run_ocr.bat            # 启动脚本
-├── run_ocr.py             # OCR 核心逻辑
-└── README.md              # 本文件
+├── env/                      # 便携式 Python 环境
+├── models/
+│   └── DeepSeek-OCR/         # DeepSeek OCR 模型文件
+├── init.bat                  # 一键启动脚本（双击即可运行）
+├── run_ocr.bat               # 快速离线启动脚本（需要已下载的模型和环境）
+├── requirements.txt          # Python依赖列表
+├── required_model_files.json # 模型文件列表
+├── check_model_files.py      # 检测模型文件存在
+├── download_model_files.py   # 下载模型文件脚本
+├── run_ocr.py                # OCR 核心逻辑
+├── README.md                 # 说明书
+└── README_zh.md              # 说明书（中文版）
+├── LICENSE                   # MIT许可证
 ```
 
 ---
 
 ## ⚠️ 注意事项
 
-- 确保 `models/DeepSeek-OCR/` 目录存在且包含完整模型文件，否则程序将无法运行
+- 初次下载可能较慢(~10GB)，请耐心等待
 - 如果遇到显存不足（out of memory）错误，可以尝试：
   - 关闭其他占用显存的程序
   - 在 `run_ocr.py` 中将 `IMAGE_SIZE` 调整为 `1024` 或 `640`
 - 当前仅支持 **Windows 系统**，不支持 macOS 或 Linux
+- 当前仅支持 **NVIDIA显卡** (程序基于CUDA 12.8)，AMD显卡或CPU无法运行
 
 ---
 
