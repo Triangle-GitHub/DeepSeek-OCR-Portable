@@ -1,118 +1,115 @@
 @echo off
-chcp 65001 >nul
 setlocal enabledelayedexpansion
 
 :: Get the directory where the script is located
 set SCRIPT_DIR=%~dp0
-
-:: Change to script directory
 cd /d "%SCRIPT_DIR%"
 
 echo ============================================================
-echo DeepSeek-OCR Portable Environment Initializer
+echo DeepSeek-OCR Portable Initializer
 echo ============================================================
 echo.
 
 :: Check env directory
-if exist "%SCRIPT_DIR%env\python.exe" (
-    echo [1/4] Existing virtual environment detected
-    echo       Skipping environment creation
+if not exist "%SCRIPT_DIR%env\python.exe" (
+    echo [ERROR] Virtual environment not found!
     echo.
-    
-    echo [2/4] Checking Python version...
-    for /f "tokens=2" %%i in ('"%SCRIPT_DIR%env\python.exe" --version 2^>^&1') do set PYTHON_VERSION=%%i
-    echo       Python detected: !PYTHON_VERSION!
+    echo This portable package requires the pre-built 'env' folder.
+    echo Please download the complete package from our repository:
+    echo   https://github.com/Triangle-GitHub/DeepSeek-OCR-Portable
     echo.
-) else (
-    :: Check if system Python is installed for creating venv
-    python --version >nul 2>&1
-    if errorlevel 1 (
-        echo [ERROR] Python not found. Please install Python 3.12 first.
-        echo.
-        echo You can download it from:
-        echo https://www.python.org/downloads/
-        echo.
-        pause
-        exit /b 1
-    )
-    
-    echo [1/4] Checking Python version...
-    for /f "tokens=2" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
-    echo       Python detected: !PYTHON_VERSION!
+    echo Do NOT try to create environment manually - it will not work.
     echo.
-    
-    echo [2/4] Creating virtual environment at %SCRIPT_DIR%env ...
-    python -m venv env
-    if errorlevel 1 (
-        echo [ERROR] Failed to create virtual environment
-        pause
-        exit /b 1
-    )
-    echo       ✓ Virtual environment created
-    echo.
+    pause
+    exit /b 1
 )
 
 :: Install dependencies using env Python
-echo [3/4] Installing Python dependencies...
+echo [1/2] Checking and installing Python dependencies...
 echo       This may take a few minutes, please wait...
 echo.
 
-:: Upgrade pip
 echo       Upgrading pip...
-"%SCRIPT_DIR%env\python.exe" -m pip install --upgrade pip --quiet
+"%SCRIPT_DIR%env\python.exe" -m pip install --upgrade pip --quiet --no-warn-script-location
 
-:: Install PyTorch CUDA build (fallback to CPU if failed)
 echo       Installing PyTorch (CUDA 12.8)...
-"%SCRIPT_DIR%env\python.exe" -m pip install torch==2.9.0+cu128 torchvision==0.24.0+cu128 torchaudio==2.9.0+cu128 --index-url https://download.pytorch.org/whl/cu128 --quiet
+"%SCRIPT_DIR%env\python.exe" -m pip install torch==2.9.0+cu128 torchvision==0.24.0+cu128 torchaudio==2.9.0+cu128 --index-url https://download.pytorch.org/whl/cu128 --no-warn-script-location
 if errorlevel 1 (
-    echo       [WARN] CUDA build failed, trying CPU build...
-    "%SCRIPT_DIR%env\python.exe" -m pip install torch torchvision torchaudio --quiet
+    echo [ERROR] PyTorch CUDA installation failed. This application requires CUDA support.
+    pause
+    exit /b 1
 )
 
-:: Install other dependencies
 echo       Installing other dependencies...
-"%SCRIPT_DIR%env\python.exe" -m pip install -r requirements.txt --quiet
+"%SCRIPT_DIR%env\python.exe" -m pip install -r requirements.txt --quiet --no-warn-script-location
 if errorlevel 1 (
     echo [ERROR] Dependency installation failed
     pause
     exit /b 1
 )
 
-echo       ✓ All dependencies installed
+echo       All dependencies installed
 echo.
 
 :: Download models
-echo [4/4] Downloading DeepSeek-OCR model files...
+echo [2/2] Checking and downloading DeepSeek-OCR model files...
 echo.
 
-if not exist "%SCRIPT_DIR%models" (
-    mkdir "%SCRIPT_DIR%models"
+set MODELS_DIR=%SCRIPT_DIR%models\DeepSeek-OCR
+
+:: Create models directory if not exists
+if not exist "%MODELS_DIR%" (
+    mkdir "%MODELS_DIR%"
 )
 
-"%SCRIPT_DIR%env\python.exe" download_models.py
-if errorlevel 1 (
+:: Run external Python script to check model files
+echo       Verifying existing model files...
+"%SCRIPT_DIR%env\python.exe" check_model_files.py >nul 2>&1
+
+:: Check return code
+if %errorlevel% EQU 0 (
+    echo       All model files already exist. Skipping download.
     echo.
-    echo [WARN] Model download not fully completed
-    echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_models.py
-    echo        Or manually download from: https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files
+) else if %errorlevel% EQU 1 (
+    echo       Some files missing or incomplete. Starting download...
     echo.
+    "%SCRIPT_DIR%env\python.exe" download_models.py
+    if errorlevel 1 (
+        echo.
+        echo [WARN] Model download not fully completed
+        echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_models.py
+        echo        Or manually download from: https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files
+        echo.
+        pause
+        exit /b 1
+    ) else (
+        echo.
+        echo Model download completed
+        echo.
+    )
 ) else (
+    echo       Unexpected error when checking models. Re-downloading to be safe...
     echo.
-    echo ✓ Model download completed
-    echo.
+    "%SCRIPT_DIR%env\python.exe" download_models.py
+    if errorlevel 1 (
+        echo.
+        echo [WARN] Model download not fully completed
+        echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_models.py
+        echo        Or manually download from: https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files
+        echo.
+        pause
+        exit /b 1
+    ) else (
+        echo.
+        echo Model download completed
+        echo.
+    )
 )
+
+
 
 :: Done
-echo ============================================================
 echo Initialization complete!
+echo.
 echo ============================================================
-echo.
-echo Usage:
-echo   1. Run OCR: run_ocr.bat
-echo   2. Or run directly: "%SCRIPT_DIR%env\python.exe" run_ocr.py
-echo.
-echo To re-download models:
-echo   "%SCRIPT_DIR%env\python.exe" download_models.py
-echo.
-
-pause
+"%SCRIPT_DIR%env\python.exe" run_ocr.py

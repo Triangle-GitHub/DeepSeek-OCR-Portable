@@ -1,4 +1,6 @@
+/__pycache__/*
 /models/*
+/env/*
 
 !/env/.gitkeep
 !/models/.gitkeep

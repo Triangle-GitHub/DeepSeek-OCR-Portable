@@ -1,0 +1,22 @@
+{
+  "model_name": "DeepSeek-OCR",
+  "base_url": "https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files",
+  "files": [
+    ".gitattributes",
+    "config.json",
+    "configuration.json",
+    "configuration_deepseek_v2.py",
+    "conversation.py",
+    "deepencoder.py",
+    "LICENSE",
+    "model.safetensors.index.json",
+    "modeling_deepseekocr.py",
+    "modeling_deepseekv2.py",
+    "processor_config.json",
+    "README.md",
+    "special_tokens_map.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "model-00001-of-000001.safetensors"
+  ]
+}

@@ -33,7 +33,6 @@ MODEL_PATH = SCRIPT_DIR / "models" / "DeepSeek-OCR"
 if not MODEL_PATH.exists():
     print(f"Model directory does not exist: {MODEL_PATH}")
     print("Please ensure the Hugging Face model cache has been copied to this location.")
-    input("Press any key to exit...")
     sys.exit(1)
 
 print(f"Using local model: {MODEL_PATH}")
@@ -52,7 +51,6 @@ IMAGE_FILE = filedialog.askopenfilename(
 )
 if not IMAGE_FILE:
     print("\nNo file selected, exiting program")
-    input("Press any key to exit...")
     sys.exit(1)
 IMAGE_FILE = Path(IMAGE_FILE)
 print(f" {IMAGE_FILE}")
@@ -83,7 +81,6 @@ try:
 except Exception as e:
     print(f"Model loading failed: {e}")
     print("Please verify that model files are complete and that the correct versions of transformers/torch are installed.")
-    input("Press any key to exit...")
     sys.exit(1)
 
 # Inference configuration
@@ -137,11 +134,9 @@ except RuntimeError as e:
         print("  → Close other GPU-intensive programs")
     else:
         print(f"\nInference error: {e}")
-    input("Press any key to exit...")
     sys.exit(1)
 except Exception as e:
     print(f"\nUnknown error: {e}")
-    input("Press any key to exit...")
     sys.exit(1)
 
 # Record end time and calculate elapsed time
@@ -157,4 +152,3 @@ def format_elapsed_time(seconds):
 formatted_time = format_elapsed_time(elapsed_time)
 
 print(f"\nExecution time: {formatted_time}")
-input("Press any key to exit...")
