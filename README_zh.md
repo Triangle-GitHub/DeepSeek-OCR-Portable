@@ -49,8 +49,8 @@ DeepSeek-OCR Portable/
 ├── download_model_files.py   # 下载模型文件脚本
 ├── run_ocr.py                # OCR 核心逻辑
 ├── README.md                 # 说明书
-└── README_zh.md              # 说明书（中文版）
-├── LICENSE                   # MIT许可证
+├── README_zh.md              # 说明书（中文版）
+└── LICENSE                   # MIT许可证
 ```
 
 ---

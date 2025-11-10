@@ -49,8 +49,8 @@ DeepSeek-OCR Portable/
 ├── download_model_files.py   # Model download script
 ├── run_ocr.py                # OCR core logic
 ├── README.md                 # Documentation
-└── README_zh.md              # Chinese documentation
-├── LICENSE                   # MIT License
+├── README_zh.md              # Chinese documentation
+└── LICENSE                   # MIT License
 ```
 
 ---
