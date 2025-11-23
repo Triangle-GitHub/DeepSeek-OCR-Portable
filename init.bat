@@ -73,11 +73,11 @@ if %errorlevel% EQU 0 (
 ) else if %errorlevel% EQU 1 (
     echo       Some files missing or incomplete. Starting download...
     echo.
-    "%SCRIPT_DIR%env\python.exe" download_model_files
+    "%SCRIPT_DIR%env\python.exe" download_model_files.py
     if errorlevel 1 (
         echo.
         echo [WARN] Model download not fully completed
-        echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_model_files
+        echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_model_files.py
         echo        Or manually download from: https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files
         echo.
         pause
@@ -90,11 +90,11 @@ if %errorlevel% EQU 0 (
 ) else (
     echo       Unexpected error when checking models. Re-downloading to be safe...
     echo.
-    "%SCRIPT_DIR%env\python.exe" download_model_files
+    "%SCRIPT_DIR%env\python.exe" download_model_files.py
     if errorlevel 1 (
         echo.
         echo [WARN] Model download not fully completed
-        echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_model_files
+        echo        You can rerun later: "%SCRIPT_DIR%env\python.exe" download_model_files.py
         echo        Or manually download from: https://www.modelscope.cn/models/deepseek-ai/DeepSeek-OCR/files
         echo.
         pause
