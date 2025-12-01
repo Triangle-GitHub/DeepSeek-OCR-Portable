@@ -26,7 +26,7 @@ def download_file(url, destination, max_retries=3):
     }
 
     if destination.exists():
-        print(f"✓ {destination.name} already exists, skipping")
+        print(f"{destination.name} already exists, skipping")
         return True
     
     temp_file = destination.with_name(destination.name + ".tmp")
@@ -79,7 +79,7 @@ def download_models():
     # Get file list
     print("Fetching file list...")
     file_list = REQUIRED_FILES
-    print(f"✓ Found {len(file_list)} files\n")
+    print(f"Found {len(file_list)} files\n")
     
     # Download files
     success_count = 0
@@ -92,13 +92,13 @@ def download_models():
         
         # Skip if exists
         if destination.exists():
-            print(f"✓ {filename} already exists, skipping")
+            print(f"{filename} already exists, skipping")
             success_count += 1
             continue
         
         print(f"\nDownloading: {filename}")
         if download_file(download_url, destination):
-            print(f"✓ Done: {filename}")
+            print(f"Done: {filename}")
             success_count += 1
         else:
             failed_files.append(filename)
